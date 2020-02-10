@@ -1,0 +1,59 @@
+<!-- TODO front-end style -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+</head>
+
+<body>
+    <div>
+        <p>
+            Users:
+        </p>
+        <div id="users"></div>
+    </div>
+    <div class="messages">
+        <form id="message-form">
+            <input type="text" name="message" id="message-input" placeholder="messaggio">
+            <button type="submit" id="submit-btn">Invia</button>
+        </form>
+
+
+        <button id="send-location">Invia posizione</button>
+
+    </div>
+    <!-- SECTION Templates -->
+    <!-- template messaggi di testo -->
+    <script id="template" type="text/template">
+        <li class="message">
+            <strong>{{from}}</strong>
+            <small>{{hour}}</small>
+            <p>{{text}}</p>
+        </li>
+    </script>
+
+    <!-- template messaggi posizione -->
+    <script id="location-template" type="text/template">
+        <li>
+            <strong>{{from}}</strong>
+            <small>{{hour}}</small>
+            <p>
+                <a href="{{url}}" target="_blank">Posizione da Google Maps</a>
+            </p>
+        </li>
+    </script>
+
+    <div id="messages-box">
+
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/libs/moment.js"></script>
+    <script src="js/libs/mustache.js"></script>
+
+</body>
+
+</html>
