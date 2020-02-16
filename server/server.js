@@ -50,6 +50,7 @@ io.on('connection', (socket) => {
             return err('Nome e room sono obbligatorie');
         }
 
+        
         //per entrare nella specifica room
         socket.join(params.room);
 
@@ -61,12 +62,12 @@ io.on('connection', (socket) => {
 
         //
         io.to(params.room).emit('updateUsers', users.getUserList(params.room))
-
+        let user = users.getUser(socket.id);
         //nuovo log all'utente appena loggato
-        socket.emit('showMessage', generateMessage('Admin', `Welocome to ${params.room}!`));
-
+        socket.emit('showMessage', generateMessage('Admin', `Welocome ${user.name} in  ${params.room} room!`));
+        
         //nuovo log agli utenti già loggati
-        socket.broadcast.to(params.room).emit('showMessage', generateMessage('Admin', "New User Joined!"));
+        socket.broadcast.to(params.room).emit('showMessage', generateMessage('Admin', `l'utente ${user.name}  è entrato!`));
         err();
     })
     //socket è per la singola connessioneì
@@ -78,8 +79,9 @@ io.on('connection', (socket) => {
         if (user && verify(message.text)) {
             //io è per tutti
             //invia al client il messaggio ricevuto
-            io.to(user.room).emit('showMessage', generateMessage(user.name, message.text))
-
+            
+            io.to(user.room).emit('showMessage', generateMessage( user.name, message.text, user.id))
+            //io.to
         }
 
     })
@@ -88,20 +90,21 @@ io.on('connection', (socket) => {
 
         let user = users.getUser(socket.id);
         if (user) {
-            io.to(user.room).emit('showLocationMessage', generateLocationMessage('Admin', coords.lat, coords.long))
+            io.to(user.room).emit('showLocationMessage', generateLocationMessage(user.name, coords.lat, coords.long, user.id))
         }
     })
     //disconnection
-    socket.on('disconnect', (socket) => {
+    socket.on('disconnect', () => {
 
 
         let user = users.removeUser(socket.id);
 
         if (user) {
-            io.to(users.room).emit('updateUsers', users.getUserList(user.room));
-            io.to(user.room).emit('showMessage', generateMessage('Admin', `${user.name} è uscito da ${user.room} room`));
+            io.to(user.room).emit('updateUsers', users.getUserList(user.room));
+            io.to(user.room).emit('showMessage', generateMessage(user.room, `${user.name} è uscito da ${user.room} room`));
+        
+            console.log("disconnesso");
         }
-        console.log("disconnesso");
     });
 });
 

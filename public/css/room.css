@@ -1,0 +1,9 @@
+button{
+     border:none!important;
+     background:none!important ;
+}
+#messages-box{
+    height: 85vh;
+    overflow: auto;
+    background: #f9f9f9;
+}

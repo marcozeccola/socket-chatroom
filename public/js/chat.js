@@ -1,11 +1,12 @@
+//TODO sistemare lo scrolltoBottom che non funziona e fare stile della chat
 //SECTION Client-side
 let socket = io();
 let btn = document.querySelector('#submit-btn');
 let messageInput = document.querySelector('#message-input');
 let box = document.querySelector('#messages-box');
 let sendLocation = document.querySelector('#send-location');
-let lastMessage = document.querySelector('.messages').lastElementChild;
-let usersList =  document.querySelector('#users');
+let lastMessage = document.querySelector('.boxx').lastElementChild;
+let usersList = document.querySelector('#users');
 //restare sull'ultimo messaggio
 function scrollToBottom() {
     lastMessage.scrollIntoView();
@@ -17,9 +18,9 @@ socket.on('connect', () => {
     let searchQuery = window.location.search.substring(1);
     let params = JSON.parse('{"' + decodeURI(searchQuery).replace(/&/g, '","').replace(/\+/g, ' ').replace(/=/g, '":"') + '"}');
     //all submit della form iniziale. passo due parametri il primo è l'oggetto dell url il secondo una callback per un eventuale errore
-    socket.emit('join',params,  function (err) {
-        if(err){
-            window.location.href= '/';
+    socket.emit('join', params, function (err) {
+        if (err) {
+            window.location.href = '/';
             alert(err);
         }
     })
@@ -29,17 +30,16 @@ socket.on('connect', () => {
 socket.on('disconnect', () => {
     console.log("disconnesso al server");
 });
-
-socket.on('updateUsers',  (users)=>{
+socket.on('updateUsers', (users) => {
     console.log(users);
-    let ol= document.createElement('ol');
+    let ol = document.createElement('ol');
     users.forEach((user) => {
         let li = document.createElement('li');
         li.innerHTML = user;
         ol.appendChild(li);
     });
 
-    usersList.innerHTML= "";
+    usersList.innerHTML = "";
     usersList.appendChild(ol);
 
 })
@@ -48,12 +48,28 @@ socket.on('showMessage', (message) => {
     //funzione per formattare data-> ora pm/am
     const timeFormat = moment(message.hour).format('LT');
     const template = document.querySelector('#template').innerHTML;
-    //mustache rendering del template
-    const html = Mustache.render(template, {
-        from: message.from,
-        text: message.text,
-        hour: timeFormat
-    });
+    const mytemplate = document.querySelector('#mychat-template').innerHTML;
+
+    console.log(message.id, socket.id)
+    if (message.id == socket.id) {
+
+        //mustache rendering del mytemplate ossia il messaggio a destra 
+        var html = Mustache.render(mytemplate, {
+            from: message.from,
+            text: message.text,
+            hour: timeFormat
+        });
+    } else {
+
+        //mustache rendering del template messaggio a sinistra
+        var html = Mustache.render(template, {
+            from: message.from,
+            text: message.text,
+            hour: timeFormat
+        });
+
+    }
+
     //crea un  div per ogni messaggio
     const div = document.createElement('div');
     div.innerHTML = html;
@@ -63,19 +79,29 @@ socket.on('showMessage', (message) => {
     scrollToBottom();
 
 })
-
 //riceve messaggio dal server
 socket.on('showLocationMessage', (message) => {
     //funzione per formattare data-> ora pm/am
     const timeFormat = moment(message.hour).format('LT');
+    const template = document.querySelector('#mylocation-template').innerHTML;
 
-    const template = document.querySelector('#location-template').innerHTML;
-    //mustache rendering del template
-    const html = Mustache.render(template, {
-        from: message.from,
-        url: message.url,
-        hour: timeFormat
-    });
+    const mytemplate = document.querySelector('#location-template').innerHTML;
+    if (message.id == socket.id) {
+        //mustache rendering del template
+        var html = Mustache.render(template, {
+            from: message.from,
+            url: message.url,
+            hour: timeFormat
+        });
+    } else {
+
+        //mustache rendering del template
+        var html = Mustache.render(mytemplate, {
+            from: message.from,
+            url: message.url,
+            hour: timeFormat
+        });
+    }
     //crea un div per ogni messaggio
     const div = document.createElement('div');
 
@@ -95,6 +121,8 @@ btn.addEventListener('click', (e) => {
         from: " Default",
         text: messageInput.value
     })
+    //reset input dopo invio
+    messageInput.value = " ";
 })
 
 
