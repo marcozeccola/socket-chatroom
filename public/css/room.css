@@ -1,9 +1,74 @@
-button{
-     border:none!important;
-     background:none!important ;
+button {
+    border: none !important;
+    background: none !important;
 }
-#messages-box{
-    height: 85vh;
+
+#messages-box {
+    margin-top: 0px;
+    height: 80vh;
     overflow: auto;
     background: #f9f9f9;
+}
+::-webkit-input-placeholder { 
+    color: white!important;
+  }
+.message-left {
+    margin-top: 5%;
+    width: 50%;
+    padding-left: 5%;
+    padding-bottom: 3%;
+    padding-top: 1%;
+    position: relative;
+
+    background-color: #c7e5c8;
+    clip-path: polygon(100% 0, 100% 100%, 10% 100%, 10% 70%, 0 50%, 10% 30%, 10% 0);}
+
+.message-right {
+    margin-top: 1%;
+    margin-left: 50%;
+    width: 50%;
+    padding-right: 5%;
+    padding-bottom: 3%;
+    padding-top: 1%;
+    position: relative;
+    background-color: #ffecb3;
+    clip-path: polygon(90% 0, 90% 30%, 100% 50%, 90% 70%, 90% 100%, 0 100%, 0 0);
+}
+
+.admin-message {
+
+    margin-top: 1%;
+    background-color: #b2dfdb;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 100px;
+} 
+.collapsible-header {
+    background-color: #b2dfdb;
+}
+
+.collapsible-body {
+    background-color: #b2dfdb;
+}
+
+.form-div{
+    margin-top: 1%;
+    margin-bottom: 0px;
+}
+@media (min-width: 600px) {
+    .message-left {
+        width: 35%;
+        margin-top: 1%;
+    }
+
+    .message-right {
+
+        margin-left: 65%;
+        width: 35%;
+    }
+
+    #messages-box {
+        height: 85vh;
+    }
 }

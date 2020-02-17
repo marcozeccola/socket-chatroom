@@ -9,14 +9,22 @@
     
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/login.css">
+    <style>
+        
+ @media (max-width: 600px) {
+    .hide-small{
+       display: none!important;
+    }
+ }
+    </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="image-card">
+    <div class="container"   >
+        <div class="image-card hide-small">
 
-            <div class="caption-text">
+            <div class="caption-text ">
                 <h2 class="image-card--title">Ricorda...</h2>
                 <div class="image-card--text">
                     <h3>Se vuoi entrare o creare una room segui queste semplici regole... <br>
@@ -25,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="signup-card">
+        <div class="signup-card" >
 
             <form class="signup" action="/chat.html">
                 <h1 class="signup-title">Log in a Room</h1>

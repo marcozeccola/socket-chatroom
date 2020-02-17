@@ -101,7 +101,7 @@ io.on('connection', (socket) => {
 
         if (user) {
             io.to(user.room).emit('updateUsers', users.getUserList(user.room));
-            io.to(user.room).emit('showMessage', generateMessage(user.room, `${user.name} è uscito da ${user.room} room`));
+            io.to(user.room).emit('showMessage', generateMessage('Admin', `${user.name} è uscito da ${user.room} room`));
         
             console.log("disconnesso");
         }

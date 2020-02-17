@@ -1,65 +1,72 @@
-::-webkit-input-placeholder { 
-  color: #748194;
-}
-.container{
-   display:block;
-   position:absolute;
-    width: auto;
-	height:auto;
-	top: calc(50% - 240px);
-	left: calc(40% - 160px);
-   border-radius:15px 15px 15px 15px;
-}
-.image-card{
-   box-shadow:0 0 10px grey;
-   background-color:white;
-   width:300px;
-   height:500px;
-   display:inline-block;
-   border-radius:15px 15px 15px 15px;
+::-webkit-input-placeholder {
+   color: #748194;
 }
 
-.image-card> .caption-text{
-   background-color:#EE9BA3;
-   width:300px;
-   height:400px;
-   display:inline-block;
-   position:absolute;
-   z-index:4;
-   border-radius:15px 15px 200px 200px;
+.container {
+   display: block;
+   position: absolute;
+   width: auto;
+   height: auto;
+   top: calc(50% - 240px);
+   left: calc(40% - 160px);
+   border-radius: 15px 15px 15px 15px;
 }
-.image-card--title{
-   color:white;
-   font-size:24px;
-   text-align:center;
-   margin-top:50px;
+
+.image-card {
+   box-shadow: 0 0 10px grey;
+   background-color: white;
+   width: 300px;
+   height: 500px;
+   display: inline-block;
+   border-radius: 15px 15px 15px 15px;
 }
-.image-card--text{
-   color:white;
-   font-size:13px;
-   text-align:center;
-   margin-top:25%;
+
+.image-card>.caption-text {
+   background-color: #EE9BA3;
+   width: 300px;
+   height: 400px;
+   display: inline-block;
+   position: absolute;
+   z-index: 4;
+   border-radius: 15px 15px 200px 200px;
 }
-.signup-title{
-    margin-top: 20%;
-    margin-bottom: 20%;
-    color:#748194;
-    font-size:30px;
-    text-align:center;
- }
-.signup-card{
-   background-color:white;
-   width:300px;
-   height:500px;
-   border-radius:15px;
-   position:absolute;
-   left:370px;
-   display:inline-block;
+
+.image-card--title {
+   color: white;
+   font-size: 24px;
+   text-align: center;
+   margin-top: 50px;
 }
-.input{
+
+.image-card--text {
+   color: white;
+   font-size: 13px;
+   text-align: center;
+   margin-top: 25%;
+}
+
+.signup-title {
+   margin-top: 20%;
+   margin-bottom: 20%;
+   color: #748194;
+   font-size: 30px;
+   text-align: center;
+}
+
+.signup-card {
+   margin: 0 50px;
+   background-color: white;
+   width: 300px;
+   height: 500px;
+   position: relative;
+   border-radius: 15px;
+   display: inline-block;
+}
+
+.input {
    font-weight: bold;
    width: 200px;
-   margin: 0 35px 20px ;
+   margin: 0 35px 20px;
    height: 35px;
    padding: 6px 15px;
    border-radius: 25px;
@@ -69,10 +76,11 @@
    color: #748194;
    font-size: 14px;
 }
-.btn{
+
+.btn {
    font-weight: bold;
    width: 230px;
-   margin: 25px 35px 20px ;
+   margin: 25px 35px 20px;
    height: 45px;
    padding: 6px 15px;
    border-radius: 5px;
@@ -81,4 +89,11 @@
    background: #EE9BA3;
    color: white;
    font-size: 14px;
+}
+
+@media(min-width:600px) {
+   .signup-card {
+      position: absolute;
+      left: 370px;
+   }
 }

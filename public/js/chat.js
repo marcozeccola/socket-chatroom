@@ -5,11 +5,11 @@ let btn = document.querySelector('#submit-btn');
 let messageInput = document.querySelector('#message-input');
 let box = document.querySelector('#messages-box');
 let sendLocation = document.querySelector('#send-location');
-let lastMessage = document.querySelector('.boxx').lastElementChild;
+let lastMessage = document.querySelector('.messages-box');
 let usersList = document.querySelector('#users');
 //restare sull'ultimo messaggio
 function scrollToBottom() {
-    lastMessage.scrollIntoView();
+    lastMessage.lastElementChild.scrollIntoView();
 }
 //connnessione
 socket.on('connect', () => {
@@ -32,15 +32,15 @@ socket.on('disconnect', () => {
 });
 socket.on('updateUsers', (users) => {
     console.log(users);
-    let ol = document.createElement('ol');
+    let ul = document.createElement('ul');
     users.forEach((user) => {
         let li = document.createElement('li');
         li.innerHTML = user;
-        ol.appendChild(li);
+        ul.appendChild(li);
     });
 
     usersList.innerHTML = "";
-    usersList.appendChild(ol);
+    usersList.appendChild(ul);
 
 })
 //riceve messaggio dal server
@@ -49,6 +49,7 @@ socket.on('showMessage', (message) => {
     const timeFormat = moment(message.hour).format('LT');
     const template = document.querySelector('#template').innerHTML;
     const mytemplate = document.querySelector('#mychat-template').innerHTML;
+    const admintemplate = document.querySelector('#admin-template').innerHTML;
 
     console.log(message.id, socket.id)
     if (message.id == socket.id) {
@@ -60,13 +61,22 @@ socket.on('showMessage', (message) => {
             hour: timeFormat
         });
     } else {
+        if (message.from === 'Admin') {
+            //mustache rendering del template messaggio a sinistra
+            var html = Mustache.render(admintemplate, {
+                from: message.from,
+                text: message.text,
+                hour: timeFormat
+            });
+        } else {
 
-        //mustache rendering del template messaggio a sinistra
-        var html = Mustache.render(template, {
-            from: message.from,
-            text: message.text,
-            hour: timeFormat
-        });
+            //mustache rendering del template messaggio a sinistra
+            var html = Mustache.render(template, {
+                from: message.from,
+                text: message.text,
+                hour: timeFormat
+            });
+        }
 
     }
 

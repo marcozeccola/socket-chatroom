@@ -20,37 +20,32 @@
 
 <body>
 
-    <div class="pos-f-t">
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-dark p-4">
-                <h4 class="text-white">Users in this room:</h4>
-                <div class="text-white">
-                    <p>
-                        Users:
-                    </p>
-                    <div id="users"></div>
-                </div>
-            </div>
+    <ul class="collapsible  ">
+        <li>
+            <div class="collapsible-header"><i class="material-icons">people</i>Utenti loggati</div>
+            <div class="collapsible-body"><span>
+                    <div class="text-white">
+                        <h5>
+                            Users:
+                        </h5>
+                        <blockquote>
+                            <div id="users"></div>
+                        </blockquote>
+                </span></div>
+        </li>
+    </ul>
+
+
+    </div>
+
+    <div class="messages">
+
+        <div id="messages-box" class="messages-box">
+
         </div>
-        <nav class="navbar navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </nav>
     </div>
 
-
-
-    <div id="messages-box" class="boxx">
-        <div>ciao</div>
-        <div>as</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-    </div>
-    <div class="messages row">
+    <div class=" row form-div">
         <form id="message-form">
             <input type="text" name="message" id="message-input" placeholder="messaggio" class="col m9 s7 l9">
             <button type="submit" id="submit-btn" class="col l1 m1 m1">
@@ -71,38 +66,52 @@
     <!-- SECTION Templates -->
     <!-- template messaggi di testo -->
     <script id="template" type="text/template">
-        <div class="message left-align">
-            <strong>{{from}}</strong>
-            <small>{{hour}}</small>
-            <p>{{text}}</p>
+        <div class="message left-align message-left">
+           <div>
+                <strong class="text-bold">{{from}}</strong>
+                <small>{{hour}}</small>
+                <p class="p">{{text}}</p>
+            </div>
+        </div>
+    </script>
+    <script id="admin-template" type="text/template">
+        <div class="message center-align  admin-message">
+            
+                <strong class="hide">{{from}} </strong>
+                <small >{{hour}}</small>
+                <p>{{text}}</p>
         </div>
     </script>
 
     <script id="mychat-template" type="text/template">
-        <div class="message right-align">
-            <strong>{{from}}</strong>
+        <div class="message right-align message-right " >
+            <div>
+            <strong class="text-bold">Tu</strong>
             <small>{{hour}}</small>
-            <p>{{text}}</p>
+            <p class="p">{{text}}</p>
+        </div>
         </div>
     </script>
+
     <!-- template messaggi posizione -->
     <script id="location-template" type="text/template">
-        <div class="message left-align">
-            <strong>{{from}}</strong>
+        <div class="message left-align message-left">
+            <strong class="text-bold">{{from}}</strong>
             <small>{{hour}}</small>
             <p>
-                <a href="{{url}}" target="_blank">Posizione da Google Maps</a>
+               
+                <a href="{{url}}" target="_blank" class="a">Posizione da Google Maps</a>
             </p>
         </div>
     </script>
 
 
     <script id="mylocation-template" type="text/template">
-        <div class="message right-align">
-            <strong>{{from}}</strong>
+        <div class="message right-align message-right ">
+            <strong class="text-bold">Tu</strong>
             <small>{{hour}}</small>
             <p>
-                <a href="{{url}}" target="_blank">Posizione da Google Maps</a>
+                <a href="{{url}}" target="_blank" class="a">Posizione da Google Maps</a>
             </p>
         </div>
     </script>
