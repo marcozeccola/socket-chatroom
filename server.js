@@ -20,7 +20,7 @@ const {
 } = require('./modules/users');
 
 //path file statici
-const publicPath = path.join(__dirname, '/../public');
+const publicPath = path.join(__dirname, './public');
 
 //se non configurato il server utilizza la porta 3000
 const port = process.env.PORT || 3000;
